@@ -45,6 +45,12 @@
     flex-shrink: 0;
     width: 50%;
 }
+.table-buttons {
+	text-align:right;
+}
+.table-buttons form {
+	display:contents;
+}
 
  
     </style>
@@ -187,153 +193,20 @@
                                 Заниматься английским по&nbsp;Скайпу&nbsp;— весело! Наши преподаватели настоящие профессионалы своего дела, интерактивные уроки не&nbsp;дадут тебе заскучать. В&nbsp;отличие от&nbsp;групповых занятий, индивидуальные уроки по&nbsp;Skype помогают быстрее побороть боязнь и&nbsp;стеснение общения на&nbsp;английском языке.</p>
       </div>
     </div>
-	<br>
-	<div class="album py-5 bg-light">
-   <h1 align="center"> <a name="lesson"></a> Наши Преподаватели </h1>
-   </div>
-   
-   <hr>
-   <br>
-
-    <!-- Three columns of text below the carousel -->
-    <div class="row">
-	
-      <div class="col-lg-4">
-        <img src="https://cdn-englishdom.gcdn.co/dsd/img/medal-border--green.svg" width="110" height="110" alt="messages" class="img-lesson-in-ed js-lazy-image">
-	
-        <p>Имеют педагогическое образование и многолетний опыт работы</p>
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-      <img src="https://cdn-englishdom.gcdn.co/dsd/img/doc--green.svg" width="110" height="110" alt="time" class="img-lesson-in-ed js-lazy-image">
-        
-        <p>Проходят многоэтапный отбор</p>
-      </div><!-- /.col-lg-4 -->
-
-	  <div class="col-lg-4">
-      <img src="https://cdn-englishdom.gcdn.co/dsd/img/graph-icon--green.svg" width="110" height="110" alt="ideas" class="img-lesson-in-ed js-lazy-image">
-        
-        <p>Проходят регулярные тренинги и курсы повышения квалификации</p>
-      </div>
-    </div>
-    <hr class="featurette-divider">
 
 
- @foreach ($lecturers as $lecturer)
-<br>
-     
-       <div class="card col-md-9">
-	   <div class="album py-5 bg-light">
-    <img class="card-img-top-1" src="{{$lecturer->picture?? ""}}" alt="Card image cap" >
 
-    <div class="card-body">
-	
-      <h5 class="card-title">Информация о преподавателе</h5>
-      <p class="card-text">Имя:{{$lecturer->name?? ""}}</p>
-	  <p class="card-text">Возраст:{{$lecturer->age?? ""}}</p>
-	  <p class="card-text">Образование:{{$lecturer->education?? ""}}</p>
-	  <p class="card-text">Опыт работы:{{$lecturer->practice?? ""}} года</p>
-    </div>
-  </div>
-  </div>
 
-	  @endforeach
-
+ 
 
     <!-- /END THE FEATURETTES -->
 
   <!-- /.container -->
-<hr>
-   <div class="album py-5 bg-light">
 
-      <h1 align="center"> <a name="curs" ></a>Курсы для любого уровня и цели</h1>
-	  </div>
-<hr>
 
-<div class="album py-5 bg-light">
-<div class="row">
-	
-      <div class="col-lg-4">
-        <img src="https://cdn-englishdom.gcdn.co/dsd/img/medal-border--green.svg" width="110" height="110" alt="messages" class="img-lesson-in-ed js-lazy-image">
-	
-        <p>Приобретешь базовый словарный запас</p>
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-      <img src="https://cdn-englishdom.gcdn.co/dsd/img/messages.svg" width="110" height="110" alt="time" class="img-lesson-in-ed js-lazy-image">
-        
-        <p>Преодолеешь языковый барьер</p>
-      </div><!-- /.col-lg-4 -->
 
-	  <div class="col-lg-4">
-      <img src="https://cdn-englishdom.gcdn.co/dsd/img/doc--green.svg" width="110" height="110" alt="ideas" class="img-lesson-in-ed js-lazy-image">
-        
-        <p>Приобретешь практические навыки грамматики</p>
-      </div>
-    </div>
-
- <table class="table table-striped mt-3">
-  <thead>
-    <tr>
-	
-      <th scope="col"></th>
-      <th scope="col">Название курса</th>
-	   <th scope="col">Цена</th>
-	  <th scope="col">Уровень</th>
-	  <th scope="col">Преподаватель, который ведет этот курс</th>
-
-    
-    </tr>
-  </thead>
-  <tbody>
-  
-@foreach ($courses as $course)
-    <tr>
-	  <th scope="row"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-lightning" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09zM4.157 8.5H7a.5.5 0 0 1 .478.647L6.11 13.59l5.732-6.09H9a.5.5 0 0 1-.478-.647L9.89 2.41 4.157 8.5z"/>
-</svg></th>
-      <th scope="row">{{$course->title?? ""}}</th>
-      <td class="table-but">{{$course->cost?? ""}}</td>
-	  <td class="table-but">{{$course->level?? ""}}</td>
-	  <td class="table-but">{{$course->lecturers->name?? ""}}</td>
-	  
-	 
-    </tr>
-  @endforeach
-  </tbody>
-</table>
-<h2 align="center"> <a name="curs" ></a>Уроки</h2>
- <table class="table table-striped mt-3">
-  <thead>
-    <tr>
-	
-
-      <th scope="col">Название курса</th>
-	  <th scope="col">Название урока</th>
-	   <th scope="col">Уровень</th>
-	   <th scope="col">Время урока</th>
-	  
-
-    
-    </tr>
-  </thead>
-  <tbody>
-  
-@foreach ($lessons as $lesson)
-    <tr>
-	  <td class="table-but">{{$lesson->courses->title?? ""}}</td>
-      <td class="table-but">{{$lesson->title?? ""}}</td>
-	  <td class="table-but">{{$lesson->level?? ""}}</td>
-	  <td class="table-but">{{$lesson->time?? ""}} минут</td>
-    
-
-	  
-	 
-    </tr>
-  @endforeach
-  </tbody>
-</table>
 </div>
-</div>
-</div>
+
 
 
 @endsection

@@ -17,13 +17,18 @@ use App\Http\Controllers;
 |
 */
 
-Route::resource('/main', 'MainController');
-Route::resource('/profile', 'UserController');
+Route::get('/', function () {
+    return view('welcome');
+});
+ 
 
+Route::resource('/teacher', 'TeacherController');
+Route::resource('/course', 'CourseController');
+Route::resource('/lesson', 'LessonController');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 

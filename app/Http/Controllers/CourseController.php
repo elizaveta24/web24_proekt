@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use App\Lecturer;
 use App\Course;
 use App\Lesson;
 use App\User;
-use Auth;
-
-class UserController extends Controller
+class CourseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,12 +16,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $lessons = Lesson :: all();
-		$users = Auth::user();
-		$lecturers = Lecturer :: all();
+        
 		$courses = Course :: all();
 
-		return view('profileuser',compact ('lessons', 'users','courses','lecturers'));
+		return view('courses.index',compact ('courses'));
     }
 
     /**
@@ -34,7 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('courses.create');
     }
 
     /**
@@ -45,7 +40,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+		'title'=>['required', 'string', 'max:255'],
+		'cost'=>['required', 'integer', 'max:10000','min:1'],
+		'level'=>['required', 'string', 'max:255'],
+
+		]);
+		$courses = new Course ([
+		'title'=>$request->get('title'),
+		'cost'=>$request->get('cost'),
+		'level'=>$request->get('level'),
+
+		]);
+		$courses->save();
+		return redirect('/course')->with('success','Курс успешно добавлен');
     }
 
     /**
@@ -56,7 +64,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $courses = Course::find($id);
+	   
+       return view('courses.show',compact ('courses'));
     }
 
     /**
@@ -67,7 +77,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+         $courses = Course::find($id);
+		return view('courses.edit',compact ('courses'));
     }
 
     /**
@@ -79,7 +90,19 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+		'title'=>['required', 'string', 'max:255'],
+		'cost'=>['required', 'integer', 'max:10000','min:1'],
+		'level'=>['required', 'string', 'max:255'],
+
+		]);
+		$courses = Course::find($id);
+		$courses ->title = $request->get('title');
+		$courses ->cost = $request->get('cost');
+		$courses ->level = $request->get('level');
+
+		$courses ->save();
+		return redirect('/course')->with('success','Курс успешно отредактирован');
     }
 
     /**
@@ -90,6 +113,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $courses = Course::find($id);
+	   $courses->delete();
+	   return redirect('/course')->with('success','Курс удален');
     }
 }

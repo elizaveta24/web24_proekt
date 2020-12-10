@@ -52,16 +52,6 @@
     <li class="list-group-item">Уровень:{{$user->level?? ""}}</li>
 	<li class="list-group-item">Пол:{{$user->gender?? ""}}</li>
 	@endforeach
-	<li class="list-group-item"><h5>Курсы пользователя</h5></li>
-	@foreach ($user->courses as $course)
-	<p class="list-group-item">{{$course->title?? ""}}</p>
-
-  </ul>
-    @endforeach
-  <div class="card-body">
-    <a href="" class="card-link">Ссылка на курсы и уроки</a>
-  
-  </div>
 </div>
 </div>
 @endsection

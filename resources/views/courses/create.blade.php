@@ -27,6 +27,7 @@
         </ul>
       </div>
     @endif
+	<h2>Создание курса</h2>
     <form method="POST" action="{{ route('course.store') }}">
      @csrf
         <div class="form-group">

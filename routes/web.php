@@ -25,7 +25,7 @@ Route::get('/', function () {
 Route::resource('/teacher', 'TeacherController');
 Route::resource('/course', 'CourseController');
 Route::resource('/lesson', 'LessonController');
-
+Route::resource('/user', 'UserController');
 Auth::routes();
 
 

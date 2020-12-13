@@ -113,8 +113,8 @@ class LessonController extends Controller
      */
     public function destroy($id)
     {
-        $lessons = Lesson::find($id);
-	   $lessons->delete();
+       $lesson = Lesson::find($id);
+	   $lesson->delete();
 	   return redirect('/lesson')->with('success','Урок удален');
     }
 }

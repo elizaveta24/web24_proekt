@@ -8,6 +8,7 @@ use App\Lecturer;
 use App\Course;
 use App\Lesson;
 use App\User;
+use Auth;
 
 class TeacherController extends Controller
 {
@@ -17,13 +18,15 @@ class TeacherController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-       
+	
+    { 
+        
 		$lecturers = Lecturer :: all();
 		$courses = Course :: all();
 
 		return view('teachers.index',compact ('courses','lecturers'));
-    }
+   
+	}
 
     /**
      * Show the form for creating a new resource.
@@ -31,8 +34,14 @@ class TeacherController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+	
+    {   if (Auth::user()->type == 'admin'){
+	
+	    
         return view('teachers.create');
+	}
+	else 
+			return redirect('/teacher');
     }
 
     /**
@@ -80,8 +89,10 @@ class TeacherController extends Controller
      */
     public function edit($id)
     {
+		if (Auth::user()->type = 'admin') {
         $lecturers = Lecturer::find($id);
 		return view('teachers.edit',compact ('lecturers'));
+		}
     }
 
     /**
@@ -92,7 +103,8 @@ class TeacherController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+	    
         $request->validate([
 		'name'=>['required', 'string', 'max:255'],
 		'age'=>['required', 'integer', 'max:100','min:0'],
@@ -117,8 +129,16 @@ class TeacherController extends Controller
      */
     public function destroy($id)
     {
-       $lecturers = Lecturer::find($id);
-	   $lecturers->delete();
-	   return redirect('/teacher')->with('success','Преподаватель  удален');
+        $lecturer = Lecturer::find($id);
+		
+		foreach ($lecturer->courses as $course){
+			if (!empty($course->lessons)){    //Я проверяю, есть ли у препода уроки, если да, то чищу
+				$course->lessons()->delete();
+			}
+		}
+		
+		$lecturer->courses()->delete();
+		$lecturer->delete();
+		return redirect('/teacher')->with('success','Преподаватель  удален');
     }
 }

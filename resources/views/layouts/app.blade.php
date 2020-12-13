@@ -35,9 +35,16 @@
 				<a class="navbar-brand" href="{{ route('course.index')   }}">
                    Курсы
                 </a>
+				
 				<a class="navbar-brand" href="{{ route('lesson.index')   }}">
                    Уроки
                 </a>
+				@auth
+				<a class="navbar-brand" href="{{ route('user.index')   }}">
+                   Профиль
+                </a>
+			
+				@endauth
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -95,6 +102,7 @@
   </footer>
 
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
 

@@ -27,32 +27,38 @@
         </ul>
       </div>
     @endif
-	<h2>Редактировать преподавателя</h2>
-    <form method="POST" action="{{route('teacher.update',$lecturers)}} ">
+	<h2>Редактировать профиль</h2>
+    <form method="POST" action="{{route('user.update',$users)}} ">
      @csrf
 	 @method('PATCH')
         <div class="form-group">
-            <label for="teacher-name">Имя</label>
+            <label for="user-name">Имя</label>
             <input type="text" name="name" 
-                   value="{{ $lecturers->name}}" class="form-control" id="teacher-name">
+                   value="{{ $users->name}}" class="form-control" id="user-name">
+        </div>
+		 <div class="form-group">
+            <label for="user-email">Email</label>
+            <input type="text" name="email" 
+                   value="{{ $users->email }}" class="form-control" id="user-email">
         </div>
 		<div class="form-group">
-            <label for="teacher-age">Возраст</label>
+            <label for="user-age">Возраст</label>
             <input type="text" name="age" 
-                   value="{{ $lecturers->age}}" class="form-control" id="teacher-age">
+                   value="{{ $users->age}}" class="form-control" id="user-age">
         </div>
        
         <div class="form-group">
-            <label for="teacher-education">Образование</label>
-            <input type="text" name="education" 
-                   value="{{ $lecturers->education }}" class="form-control" id="teacher-education">
+            <label for="user-level">Уровень</label>
+            <input type="text" name="level" 
+                   value="{{ $users->level }}" class="form-control" id="user-level">
         </div>
 		 <div class="form-group">
-            <label for="teacher-practice">Опыт работы</label>
-            <input type="text" name="practice" 
-                   value="{{ $lecturers->practice }}" class="form-control" id="teacher-practice">
+            <label for="user-gender">Опыт работы</label>
+            <input type="text" name="gender" 
+                   value="{{ $users->gender }}" class="form-control" id="user-gender">
         </div>
-        <button type="submit" class="btn btn-success">Редактировать преподавателя</button>
+		
+        <button type="submit" class="btn btn-success">Редактировать профиль</button>
     </form>
 </div>
 </div>

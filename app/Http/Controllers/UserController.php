@@ -9,6 +9,7 @@ use App\Course;
 use App\Lesson;
 use App\User;
 use Auth;
+use App\course_user;
 
 class UserController extends Controller
 {
@@ -19,12 +20,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        $lessons = Lesson :: all();
+        $courses = Course :: all();
 		$users = Auth::user();
-		$lecturers = Lecturer :: all();
-		$courses = Course :: all();
+		
+		
+		
+	
 
-		return view('profileuser',compact ('lessons', 'users','courses','lecturers'));
+		return view('users.index',compact ('users','courses'));
     }
 
     /**
@@ -67,7 +70,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+       $users = User::find($id);
+		return view('users.edit',compact ('users'));
     }
 
     /**
@@ -79,7 +83,22 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $request->validate([
+		'name'=>['required', 'string', 'max:255'],
+		'email'=>['required', 'string', 'max:255'],
+		'age'=>['required', 'integer', 'max:100','min:0'],
+		'level'=>['required', 'string', 'max:255'],
+		'gender'=>['required', 'string', 'max:255'],
+
+		]);
+		$users = User::find($id);
+		$users->name = $request->get('name');
+		$users->email =$request->get('email');
+		$users->age = $request->get('age');
+		$users->level = $request->get('level');
+		$users->gender =$request->get('gender');
+		$users->save();
+		return redirect('/user')->with('success','Данные успешно измененны');
     }
 
     /**

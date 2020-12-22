@@ -21,7 +21,7 @@ class TeacherController extends Controller
 	
     { 
         
-		$lecturers = Lecturer :: all();
+		$lecturers = Lecturer :: paginate(2);
 		$courses = Course :: all();
 
 		return view('teachers.index',compact ('courses','lecturers'));
@@ -35,13 +35,12 @@ class TeacherController extends Controller
      */
     public function create()
 	
-    {   if (Auth::user()->type == 'admin'){
+    {   
 	
 	    
         return view('teachers.create');
-	}
-	else 
-			return redirect('/teacher');
+	
+		
     }
 
     /**
@@ -57,12 +56,14 @@ class TeacherController extends Controller
 		'age'=>['required', 'integer', 'max:100','min:0'],
 		'education'=>['required', 'string', 'max:255'],
 		'practice'=>['required', 'integer', 'max:100','min:0'],
+		'info'=>[ 'nullable','string', 'max:255'],
 		]);
 		$lecturers = new Lecturer ([
 		'name'=>$request->get('name'),
 		'age'=>$request->get('age'),
 		'education'=>$request->get('education'),
-		'practice'=>$request->get('practice')
+		'practice'=>$request->get('practice'),
+		'info'=>$request->get('info')
 		]);
 		$lecturers->save();
 		return redirect('/teacher')->with('success','Преподаватель успешно добавлен');
@@ -110,12 +111,14 @@ class TeacherController extends Controller
 		'age'=>['required', 'integer', 'max:100','min:0'],
 		'education'=>['required', 'string', 'max:255'],
 		'practice'=>['required', 'integer', 'max:100','min:0'],
+		'info'=>['nullable','string', 'max:255'],
 		]);
 		$lecturers = Lecturer::find($id);
 		$lecturers->name = $request->get('name');
 		$lecturers->age = $request->get('age');
 		$lecturers->education = $request->get('education');
 		$lecturers->practice =$request->get('practice');
+		$lecturers->info =$request->get('info');
 		$lecturers->save();
 		return redirect('/teacher')->with('success','Преподаватель успешно отредактирован');
 		

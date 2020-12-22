@@ -26,6 +26,7 @@
       <h5 class="card-title">{{$lessons->title?? ""}}</h5>
 	  <p class="card-text">Время:{{$lessons->time?? ""}} минут</p>
 	  <p class="card-text">Уровень:{{$lessons->level?? ""}}</p>
+	  <p class="card-text">Дополнительная информация:{{$lessons->info?? ""}}</p>
 
 
  

@@ -47,6 +47,17 @@
             <input type="text" name="level" 
                    value="{{ $lessons->level}}" class="form-control" id="lesson-level">
         </div>
+		  <div class="form-group">
+            <label for="lesson-course">Номер курса</label>
+            <input type="text" name="course_id" 
+                   value="{{$lessons->course_id}}" class="form-control" id="lesson-course">
+        </div>
+		<div class="form-group">
+            <label for="lesson-info">Дополнительная информация</label>
+            <input type="text" name="info" 
+                   value="{{ $lessons->info}}" class="form-control" id="lesson-info">
+        </div>
+		
 
         <button type="submit" class="btn btn-success">Отредактировать урок</button>
     </form>

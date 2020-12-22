@@ -48,9 +48,6 @@
 .table-buttons {
 	text-align:right;
 }
-.btn-p {
-	text-align:center;
-}
 .table-buttons form {
 	display:contents;
 }
@@ -77,87 +74,50 @@
     </div>
 @endif
 
-   <div class="album py-5 bg-light">
-
-      <h1 align="center"> <a name="curs" ></a>Курсы для любого уровня и цели</h1>
-	  </div>
-<hr>
-
-<div class="album py-5 bg-light">
-<div class="row">
+  <div class="container marketing">
+  <div class="album py-5 bg-light">
+ 
+   
 	
-      <div class="col-lg-4">
-        <img src="https://cdn-englishdom.gcdn.co/dsd/img/medal-border--green.svg" width="110" height="110" alt="messages" class="img-lesson-in-ed js-lazy-image">
-	
-        <p>Приобретешь базовый словарный запас</p>
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-      <img src="https://cdn-englishdom.gcdn.co/dsd/img/messages.svg" width="110" height="110" alt="time" class="img-lesson-in-ed js-lazy-image">
-        
-        <p>Преодолеешь языковый барьер</p>
-      </div><!-- /.col-lg-4 -->
+  <h1 align="center"> <a name="lesson"></a> Отзывы о нас</h1>
+  </div>
 
-	  <div class="col-lg-4">
-      <img src="https://cdn-englishdom.gcdn.co/dsd/img/doc--green.svg" width="110" height="110" alt="ideas" class="img-lesson-in-ed js-lazy-image">
-        
-        <p>Приобретешь практические навыки грамматики</p>
-      </div>
-    </div>
-	</div>
+<br>
+<br>
+@If (Auth::user())
+		   
+	      <a href="{{route('review.create')}} " class="btn btn-primary">
+      Добавить отзыв
+</a>
+@endif
+<br>
+
+ @foreach ($reviews as $review)
+<br>
+ <div class="card col-md-9">
+	   <div class="album py-5 bg-light" background="https://klike.net/uploads/posts/2020-04/1586763588_29.jpg">
+	   <h5 class="card-text">{{$review->created_at?? ""}}</h5>
+	    <h5 class="card-title">Отзыв от:{{$review->user_name?? ""}}</h5>
+       
+    <div class="card-body">
+     
+      <h5 class="card-text">{{$review->title?? ""}}</h5>
+
 	@If (Auth::user())
-	@If (Auth::user()->type == 'admin'|| Auth::user()->type == 'manager')
-	<h1 align="center"> Добавить курс</h1>
-	    <a href="{{route('course.create')}} " class="btn btn-primary">
-Добавить
-        </a>
-			  @endif
-			   @endif
-    <table class="table table-striped mt-3">
-  <thead>
-    <tr>
-
-	  <th scope="col">Номер курса</th>
-      <th scope="col">Название курса</th>
-	   <th scope="col">Цена</th>
-	  <th scope="col">Уровень</th>
-	  <th scope="col">Номер преподавателя,который ведет этот курс</th>
-      <th scope="col">Имя преподавателя,который ведет этот курс</th>
-    
-    </tr>
-  </thead>
-  <tbody>
-  
-  @foreach ($courses as $course)
-    <tr>
 	 
-	  <th scope="row">{{$course->id?? ""}}</th>
-      <th scope="row">{{$course->title?? ""}}</th>
-      <td class="table-but">{{$course->cost?? ""}}</td>
-	  <td class="table-but">{{$course->level?? ""}}</td>
-	  <td class="table-but">{{$course->lecturer->id?? ""}}</td>
-	  <td class="table-but">{{$course->lecturer->name?? ""}}</td>
-	  
-	 
-	  
-		  @If (Auth::user())
-	  
-    	  <td class="table-buttons">
-		<a href="{{route('course.show',$course)}} " class="btn btn-success">
-         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
-  <path fill-rule="evenodd" d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
-</svg>
-        </a>
-		@If (Auth::user()->type == 'admin'|| Auth::user()->type == 'manager')
-        <a href="{{route('course.edit',$course)}} " class="btn btn-success">
+		   @If (Auth::user()->type == 'admin'|| Auth::user()->type == 'manager')
+			    <td class="table-buttons">
+        <a href="{{route('review.edit',$review)}} " class="btn btn-success">
           <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
   <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
 </svg>
         </a>
-		
+   
+        </a>
 		@If (Auth::user()->type == 'admin')
-        <form method="POST" action="{{route('course.destroy',$course)}} ">
+			
+        <form method="POST" action="{{route('review.destroy',$review)}} ">
          @csrf
          @method('DELETE')
             <button type="submit" class="btn btn-danger">
@@ -171,14 +131,14 @@
 	   @endif
 	  @endif
 	  @endif
-    </tr>
-    @endforeach
-  </tbody>
-</table>
-{{$courses->links()}}
-  </div>	
-@endsection
 
+    </div>
+    </div>
+	</div>
+@endforeach
+<br>
+{{$reviews->links()}}	
+@endsection
 </main>
 
 </body>

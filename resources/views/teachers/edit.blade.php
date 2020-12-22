@@ -52,6 +52,11 @@
             <input type="text" name="practice" 
                    value="{{ $lecturers->practice }}" class="form-control" id="teacher-practice">
         </div>
+		<div class="form-group">
+            <label for="teacher-info">Дополнительная информация</label>
+            <input type="text" name="info" 
+                   value="{{ $lecturers->info }}" class="form-control" id="teacher-info">
+        </div>
         <button type="submit" class="btn btn-success">Редактировать преподавателя</button>
     </form>
 </div>

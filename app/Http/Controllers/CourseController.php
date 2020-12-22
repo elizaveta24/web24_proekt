@@ -17,7 +17,7 @@ class CourseController extends Controller
     public function index()
     {
         
-		$courses = Course :: all();
+		$courses = Course :: paginate(3);
 
 		return view('courses.index',compact ('courses'));
     }
@@ -44,13 +44,15 @@ class CourseController extends Controller
 		'title'=>['required', 'string', 'max:255'],
 		'cost'=>['required', 'integer', 'max:10000','min:1'],
 		'level'=>['required', 'string', 'max:255'],
-
+		'lecturer_id'=>['required', 'integer', 'max:20','min:1'],
+        'info'=>['nullable', 'string', 'max:255'],
 		]);
 		$courses = new Course ([
 		'title'=>$request->get('title'),
 		'cost'=>$request->get('cost'),
 		'level'=>$request->get('level'),
-
+		'lecturer_id'=>$request->get('lecturer_id'),
+        'info'=>$request->get('info'),
 		]);
 		$courses->save();
 		return redirect('/course')->with('success','Курс успешно добавлен');
@@ -94,13 +96,16 @@ class CourseController extends Controller
 		'title'=>['required', 'string', 'max:255'],
 		'cost'=>['required', 'integer', 'max:10000','min:1'],
 		'level'=>['required', 'string', 'max:255'],
+		'lecturer_id'=>['required', 'integer', 'max:20','min:1'],
+		'info'=>['nullable', 'string', 'max:255'],
 
 		]);
 		$courses = Course::find($id);
 		$courses ->title = $request->get('title');
 		$courses ->cost = $request->get('cost');
 		$courses ->level = $request->get('level');
-
+		$courses ->lecturer_id = $request->get('lecturer_id');
+        $courses ->info = $request->get('info');
 		$courses ->save();
 		return redirect('/course')->with('success','Курс успешно отредактирован');
     }

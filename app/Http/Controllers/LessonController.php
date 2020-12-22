@@ -17,7 +17,7 @@ class LessonController extends Controller
     public function index()
     {
         $courses = Course :: all();
-		$lessons = Lesson :: all();
+		$lessons = Lesson :: paginate(3);
 
 		return view('lessons.index',compact ('courses','lessons'));
     }
@@ -44,14 +44,19 @@ class LessonController extends Controller
 		'title'=>['required', 'string', 'max:255'],
 		'time'=>['required', 'integer', 'max:60','min:30'],
 		'level'=>['required', 'string', 'max:255'],
+		'course_id'=>['required', 'integer', 'max:100'],
+		'info'=>['nullable', 'string', 'max:255'],
 
 		]);
 		$lessons = new Lesson ([
 		'title'=>$request->get('title'),
 		'time'=>$request->get('time'),
 		'level'=>$request->get('level'),
+		'course_id'=>$request->get('course_id'),
+		'info'=>$request->get('info'),
 
 		]);
+		
 		$lessons->save();
 		return redirect('/lesson')->with('success','Урок успешно добавлен');
     }
@@ -78,7 +83,8 @@ class LessonController extends Controller
     public function edit($id)
     {
          $lessons = Lesson::find($id);
-		return view('lessons.edit',compact ('lessons'));
+		 $courses = Course::find($id);
+		return view('lessons.edit',compact ('lessons','courses'));
     }
 
     /**
@@ -94,13 +100,17 @@ class LessonController extends Controller
 		'title'=>['required', 'string', 'max:255'],
 		'time'=>['required', 'integer', 'max:60','min:30'],
 		'level'=>['required', 'string', 'max:255'],
+		'course_id'=>['required', 'integer', 'max:20','min:1'],
+		'info'=>['nullable', 'string', 'max:255'],
 
 		]);
 		$lessons = Lesson::find($id);
 		$lessons ->title = $request->get('title');
 		$lessons ->time = $request->get('time');
 		$lessons ->level = $request->get('level');
-
+		$lessons ->course_id = $request->get('course_id');
+		$lessons ->info = $request->get('info');
+	
 		$lessons ->save();
 		return redirect('/lesson')->with('success','Урок успешно отредактирован');
     }

@@ -3,6 +3,7 @@ use App\Lecturer;
 use App\Course;
 use App\Lesson;
 use App\User;
+use App\Review;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 
@@ -26,6 +27,7 @@ Route::resource('/teacher', 'TeacherController');
 Route::resource('/course', 'CourseController');
 Route::resource('/lesson', 'LessonController');
 Route::resource('/user', 'UserController');
+Route::resource('/review', 'ReviewController');
 Auth::routes();
 
 

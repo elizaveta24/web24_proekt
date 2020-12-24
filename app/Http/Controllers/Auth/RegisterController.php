@@ -55,6 +55,7 @@ class RegisterController extends Controller
 			'level' => ['required', 'string', 'max:100'],
 			'gender' => ['required', 'string', 'max:100'],
 			'age' => ['required', 'integer', 'max:100','min:0'],
+			'course' => ['nullable', 'integer', 'max:20','min:1'],
         ]);
     }
 
@@ -73,6 +74,7 @@ class RegisterController extends Controller
 			'age' => $data['age'],
 			'level' => $data['level'],
 			'gender' => $data['gender'],
+			'course_id' => $data['course'],
         ]);
     }
 }

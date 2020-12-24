@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','age','level','gender','type',
+        'name', 'email', 'password','age','level','gender','type','course_id'
     ];
 
     /**
@@ -37,7 +37,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 	public function course(){
-		return $this->belongsToMany('App\Course');
+		return $this->belongsTo('App\Course','course_id');
 	}
     	public function reviews()
 {

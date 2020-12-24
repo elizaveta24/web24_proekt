@@ -64,9 +64,7 @@
     
 	 <!-- Bootstrap шаблон... -->
 
- <head>
 
- </head>
  <div class = "container mt-3">
  @if(session()->get('success'))
     <div class="alert alert-success mt-3">
@@ -97,12 +95,13 @@
  <div class="card col-md-9">
 	   <div class="album py-5 bg-light" background="https://klike.net/uploads/posts/2020-04/1586763588_29.jpg">
 	   <h5 class="card-text">{{$review->created_at?? ""}}</h5>
+ <hr>
 	    <h5 class="card-title">Отзыв от:{{$review->user_name?? ""}}</h5>
-       
+      
     <div class="card-body">
-     
+      <hr>
       <h5 class="card-text">{{$review->title?? ""}}</h5>
-
+ <hr>
 	@If (Auth::user())
 	 
 		   @If (Auth::user()->type == 'admin'|| Auth::user()->type == 'manager')
@@ -139,7 +138,7 @@
 <br>
 {{$reviews->links()}}	
 @endsection
-</main>
+
 
 </body>
 </html>

@@ -12,7 +12,8 @@
     <title>Редактировать преподавателя </title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
-
+  </head>
+  <body>
 @extends('layouts.app')
 
 @section('content')
@@ -40,4 +41,9 @@
     </form>
 </div>
 </div>
+
 @endsection
+
+
+</body>
+</html>

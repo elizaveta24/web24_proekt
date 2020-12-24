@@ -89,6 +89,8 @@ class UserController extends Controller
 		'age'=>['required', 'integer', 'max:100','min:0'],
 		'level'=>['required', 'string', 'max:255'],
 		'gender'=>['required', 'string', 'max:255'],
+		'course'=>['nullable', 'integer', 'max:20','min:1'],
+
 
 		]);
 		$users = User::find($id);
@@ -97,7 +99,10 @@ class UserController extends Controller
 		$users->age = $request->get('age');
 		$users->level = $request->get('level');
 		$users->gender =$request->get('gender');
+		$users->course_id =$request->get('course');
 		$users->save();
+		
+		
 		return redirect('/user')->with('success','Данные успешно измененны');
     }
 

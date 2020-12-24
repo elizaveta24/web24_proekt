@@ -57,6 +57,11 @@
             <input type="text" name="gender" 
                    value="{{ $users->gender }}" class="form-control" id="user-gender">
         </div>
+		 <div class="form-group">
+            <label for="user-course">Напишите номер выбранного курса</label>
+            <input type="text" name="course" 
+                   value="{{ $users->course_id }}" class="form-control" id="user-course">
+        </div>
 		
         <button type="submit" class="btn btn-success">Редактировать профиль</button>
     </form>

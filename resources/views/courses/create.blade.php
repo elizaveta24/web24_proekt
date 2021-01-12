@@ -48,7 +48,7 @@
         </div>
 		<div class="form-group">
 		<label for="course-level">Преподаватель</label>
-		<select name="lecturer_id">
+		<select name="lecturer_id"  class="custom-select">
 
 			@foreach ($lecturers as $lecturer)
             <option   value="{{ $lecturer->id}}" {{$lecturer->id == old('lecturer',$lecturer->id)? 'selected': ''}}>

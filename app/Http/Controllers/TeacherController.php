@@ -145,6 +145,7 @@ class TeacherController extends Controller
 		}
 		
 		$lecturer->courses()->delete();
+		$lecturer->comments()->delete();
 		$lecturer->delete();
 		return redirect('/teacher')->with('success','Преподаватель  удален');
     }

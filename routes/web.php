@@ -30,7 +30,7 @@ Route::resource('/lesson', 'LessonController');
 Route::resource('/user', 'UserController');
 Route::resource('/review', 'ReviewController');
 Route::resource('/comment', 'CommentController');
-Route::resource('/teacher/show', 'TeacherController@show');
+Route::get('/teacher/show', 'TeacherController@show')->name('teacherShow');
 Auth::routes();
 
 

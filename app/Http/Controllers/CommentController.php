@@ -20,7 +20,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comments= Comment :: paginate(2);
+        $comments= Comment :: all();
 		$lecturers= Lecturer::all();
 
 		return view('teachers.show',compact ('comments','lecturers'));
@@ -49,14 +49,21 @@ class CommentController extends Controller
 		'lecturer'=>['nullable', 'integer', 'max:100'],
 
 		]);
+		
+		//dd($request->all());
 		$comments = new Comment ([
 		'title'=>$request->get('title'),
 		'lecturer'=>$request->get('lecturer_id'),
 		]);
 		$comments->user_name=Auth::user()->name;
+		$comments->user_id = Auth::user()->id;
+		$comments->lecturer_id = $request->lecturer_id;
+		
 		
 		$comments->save();
-		return redirect('/teacher')->with('success','Отзыв успешно добавлен');
+		//return redirect('/teacher')->with('success','Отзыв успешно добавлен');
+		//return redirect()->route('teacherShow', $comments)->with('success','Отзыв успешно добавлен');
+		return redirect()->back()->with('success','Отзыв успешно добавлен');
     }
 
     /**
@@ -112,6 +119,6 @@ class CommentController extends Controller
     {   $comments = Comment::find($id);
 	  
         $comments->delete();
-	   return redirect()->route('teachers.show',$lecturers->id)->with('success','Отзыв удален');
+	  return redirect()->back()->with('success','Отзыв успешно удален');
     }
 }

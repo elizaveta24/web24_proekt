@@ -33,6 +33,7 @@
     </div>
 	</div>
 <br>
+
 		   @If (Auth::user())
 		<h2>Написать отзыв</h2>
     <form method="POST" action="{{ route('comment.store') }}" >
@@ -41,7 +42,7 @@
 		  <div class="form-group">
             <label for="comment-title">Ваш отзыв</label>
 		
-			  <input type="hidden" name="lecturer" value="{{$lecturers->id}}">
+			  <input type="hidden" name="lecturer_id" value="{{$lecturers->id}}">
 			
             <input type="text" name="title" 
                    value="{{ old('title') }}" class="form-control" id="comment-title">
@@ -52,7 +53,7 @@
  @endif
 <br>
 
- @foreach ($comments as $comment)
+ @foreach ($lecturers->comments as $comment)
 <br>
  <div class="card col-md-9">
 	   <div class="album py-5 bg-light" background="https://klike.net/uploads/posts/2020-04/1586763588_29.jpg">
@@ -101,9 +102,11 @@
     </div>
     </div>
 	</div>
+		
   @endforeach
+
 <br>
-{{$comments->links()}}	
+
 @endsection
 
 

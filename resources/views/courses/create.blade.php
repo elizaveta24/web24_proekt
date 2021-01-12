@@ -46,11 +46,17 @@
             <input type="text" name="level" 
                    value="{{ old('level') }}" class="form-control" id="course-level">
         </div>
-		   <div class="form-group">
-            <label for="course-lecturer_id">Номер преподавателя</label>
-            <input type="text" name="lecturer_id" 
-                   value="{{ old('lecturer_id') }}" class="form-control" id="course-lecturer_id">
-        </div>
+		<div class="form-group">
+		<label for="course-level">Преподаватель</label>
+		<select name="lecturer_id">
+
+			@foreach ($lecturers as $lecturer)
+            <option   value="{{ $lecturer->id}}" {{$lecturer->id == old('lecturer',$lecturer->id)? 'selected': ''}}>
+			{{$lecturer->name}}
+			</option>
+        @endforeach
+		</select>
+         </div>
 		<div class="form-group">
             <label for="course-info">Дополнительная информация</label>
             <input type="text" name="info" 

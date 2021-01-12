@@ -116,11 +116,11 @@
   <thead>
     <tr>
 
-	  <th scope="col">Номер курса</th>
+
       <th scope="col">Название курса</th>
 	   <th scope="col">Цена</th>
 	  <th scope="col">Уровень</th>
-	  <th scope="col">Номер преподавателя,который ведет этот курс</th>
+
       <th scope="col">Имя преподавателя,который ведет этот курс</th>
     
     </tr>
@@ -130,11 +130,11 @@
   @foreach ($courses as $course)
     <tr>
 	 
-	  <th scope="row">{{$course->id?? ""}}</th>
+
       <th scope="row">{{$course->title?? ""}}</th>
       <td class="table-but">{{$course->cost?? ""}}</td>
 	  <td class="table-but">{{$course->level?? ""}}</td>
-	  <td class="table-but">{{$course->lecturer->id?? ""}}</td>
+
 	  <td class="table-but">{{$course->lecturer->name?? ""}}</td>
 	  
 	 

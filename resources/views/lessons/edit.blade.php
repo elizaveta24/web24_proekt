@@ -47,11 +47,18 @@
             <input type="text" name="level" 
                    value="{{ $lessons->level}}" class="form-control" id="lesson-level">
         </div>
-		  <div class="form-group">
-            <label for="lesson-course">Номер курса</label>
-            <input type="text" name="course_id" 
-                   value="{{$lessons->course_id}}" class="form-control" id="lesson-course">
-        </div>
+		<div class="form-group">
+		<label for="course-level">Курс</label>
+		<select name="course_id">
+
+			@foreach ($courses as $course)
+            <option   value="{{ $course->id}}" {{$course->id == old('course',$course->id)? 'selected': ''}}>
+			{{$course->title}}
+			</option>
+        @endforeach
+		</select>
+         </div>
+
 		<div class="form-group">
             <label for="lesson-info">Дополнительная информация</label>
             <input type="text" name="info" 

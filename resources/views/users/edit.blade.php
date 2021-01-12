@@ -58,10 +58,16 @@
                    value="{{ $users->gender }}" class="form-control" id="user-gender">
         </div>
 		 <div class="form-group">
-            <label for="user-course">Напишите номер выбранного курса</label>
-            <input type="text" name="course" 
-                   value="{{ $users->course_id }}" class="form-control" id="user-course">
-        </div>
+		<label for="course-level">Курс</label>
+		<select name="course">
+
+			@foreach ($courses as $course)
+            <option   value="{{ $course->id}}" {{$course->id == old('course',$course->id)? 'selected': ''}}>
+			{{$course->title}}
+			</option>
+        @endforeach
+		</select>
+         </div>
 		
         <button type="submit" class="btn btn-success">Редактировать профиль</button>
     </form>

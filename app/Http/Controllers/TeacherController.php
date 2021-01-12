@@ -9,6 +9,7 @@ use App\Course;
 use App\Lesson;
 use App\User;
 use Auth;
+use App\Comment;
 
 class TeacherController extends Controller
 {
@@ -23,8 +24,9 @@ class TeacherController extends Controller
         
 		$lecturers = Lecturer :: paginate(2);
 		$courses = Course :: all();
+		$comments= Comment :: all();
 
-		return view('teachers.index',compact ('courses','lecturers'));
+		return view('teachers.index',compact ('courses','lecturers','comments'));
    
 	}
 
@@ -79,7 +81,9 @@ class TeacherController extends Controller
     {  
 	   $lecturers = Lecturer::find($id);
 	   
-       return view('teachers.show',compact ('lecturers'));
+	   $comments= Comment :: paginate(2);
+	   
+       return view('teachers.show',compact ('lecturers','comments'));
     }
 
     /**

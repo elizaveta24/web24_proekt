@@ -28,8 +28,9 @@ class CourseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('courses.create');
+	
+    {   $lecturers = Lecturer ::all();
+        return view('courses.create',compact('lecturers'));
     }
 
     /**
@@ -78,9 +79,9 @@ class CourseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {    $lecturers = Lecturer ::all();
          $courses = Course::find($id);
-		return view('courses.edit',compact ('courses'));
+		return view('courses.edit',compact ('courses','lecturers'));
     }
 
     /**

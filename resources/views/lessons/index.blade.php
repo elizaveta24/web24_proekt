@@ -129,7 +129,7 @@
     <table class="table table-striped mt-3">
   <thead>
     <tr>
-	  <th scope="col">Номер курса</th>
+	 
       <th scope="col">Название курса</th>
 	   <th scope="col">Название урока</th>
 	   <th scope="col">Время урока</th>
@@ -141,7 +141,7 @@
   
   @foreach ($lessons as $lesson)
     <tr>
-	  <th scope="row">{{$lesson->course->id?? ""}}</th>
+	 
 	  <th scope="row">{{$lesson->course->title?? ""}}</th>
       <th scope="row">{{$lesson->title?? ""}}</th>
       <td class="table-but">{{$lesson->time?? ""}} минут</td>

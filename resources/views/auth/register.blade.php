@@ -100,19 +100,7 @@
                                 @enderror
                             </div>
                         </div>
-						<div class="form-group row">
-                            <label for="course" class="col-md-4 col-form-label text-md-right">{{ __('Напишите номер выбранного курса') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="course" type="text" class="form-control @error('course') is-invalid @enderror" name="course" value="{{ old('course') }}" required autocomplete="course" autofocus>
-
-                                @error('level')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+						
 						
 
                         <div class="form-group row mb-0">

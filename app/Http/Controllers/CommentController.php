@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use App\Lecturer;
 use App\Course;
 use App\Lesson;
 use App\User;
 use Auth;
-use App\course_user;
+use App\Review;
+use App\Comment;
 
-class UserController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,14 +20,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $courses = Course :: all();
-		$users = Auth::user();
-		
-		
-		
-	
+        $comments= Comment :: paginate(2);
+		$lecturers= Lecturer::all();
 
-		return view('users.index',compact ('users','courses'));
+		return view('teachers.show',compact ('comments','lecturers'));
     }
 
     /**
@@ -36,8 +32,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {   $lecturers= Lecturer::find($id);
+        return view('teachers.show',compact ('lecturers'));
     }
 
     /**
@@ -48,7 +44,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+		'title'=>['required', 'string', 'max:255','min:1'],
+		'lecturer'=>['nullable', 'integer', 'max:100'],
+
+		]);
+		$comments = new Comment ([
+		'title'=>$request->get('title'),
+		'lecturer'=>$request->get('lecturer_id'),
+		]);
+		$comments->user_name=Auth::user()->name;
+		
+		$comments->save();
+		return redirect('/teacher')->with('success','Отзыв успешно добавлен');
     }
 
     /**
@@ -69,10 +77,9 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {  
-	  $courses= Course::all();
-       $users = User::find($id);
-		return view('users.edit',compact ('users','courses'));
+    {
+        $comments = Comment::find($id);
+		return view('comments.edit',compact ('comments'));
     }
 
     /**
@@ -84,27 +91,15 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $request->validate([
-		'name'=>['required', 'string', 'max:255'],
-		'email'=>['required', 'string', 'max:255'],
-		'age'=>['required', 'integer', 'max:100','min:0'],
-		'level'=>['required', 'string', 'max:255'],
-		'gender'=>['required', 'string', 'max:255'],
-		'course'=>['nullable', 'integer', 'max:20','min:1'],
-
+        $request->validate([
+		'title'=>['required', 'string', 'max:255','min:1'],
 
 		]);
-		$users = User::find($id);
-		$users->name = $request->get('name');
-		$users->email =$request->get('email');
-		$users->age = $request->get('age');
-		$users->level = $request->get('level');
-		$users->gender =$request->get('gender');
-		$users->course_id =$request->get('course');
-		$users->save();
-		
-		
-		return redirect('/user')->with('success','Данные успешно измененны');
+		$comments = Comment::find($id);
+		$comments ->title = $request->get('title');
+
+		$comments ->save();
+		return redirect('/teacher')->with('success','Отзыв успешно отредактирован');
     }
 
     /**
@@ -114,7 +109,9 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {   $comments = Comment::find($id);
+	  
+        $comments->delete();
+	   return redirect()->route('teachers.show',$lecturers->id)->with('success','Отзыв удален');
     }
 }
